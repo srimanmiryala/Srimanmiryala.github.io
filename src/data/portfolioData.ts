@@ -15,7 +15,7 @@ export const PERSONAL_DETAILS = {
   socials: {
     leetcode: "https://leetcode.com/u/Srimanmiryala",
     codeforces: "https://codeforces.com/profile/Srimanmiryala",
-    linkedin: "https://linkedin.com/in/srimanmiryala",
+    linkedin: "https://www.linkedin.com/in/sriman-miry3549651b6",
     github: "https://github.com/srimanmiryala",
     email: "mailto:srimanmiryala9@gmail.com"
   }

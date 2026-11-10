@@ -1,549 +1,2392 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sriman Miryala — Software Engineer & Apprentice @ DBS Bank</title>
-  <meta name="description" content="Portfolio of Miryala Sriman — Software Engineer Apprentice at DBS Bank Technology. LeetCode Knight (1989), Codeforces Specialist (1503)." />
-  <link rel="icon" type="image/svg+xml" href="favicon.ico" />
-  
-  <!-- Modern Geometric Typography -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Sriman Miryala — Software Engineer & Apprentice @ DBS Bank Technology</title>
+  <meta name="description" content="Portfolio of Sriman Miryala — Software Engineer Apprentice at DBS Bank Technology. LeetCode Knight (1989), Codeforces Specialist (1503), 1,500+ problems solved." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+
+  <!-- Google Fonts: Plus Jakarta Sans (Modern Geometric Display) + Inter (Clean Body) + JetBrains Mono (Code/Terminal) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Devicon for Crisp Tech Logos -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Geist"', 'Inter', '-apple-system', 'sans-serif'],
-            mono: ['"Geist Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              400: '#38bdf8',
-              500: '#0ea5e9',
-              dark: '#080c14',
-            }
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+    :root {
+      --bg: #060911;
+      --bg-surface: #0a0f1d;
+      --card-bg: rgba(15, 23, 42, 0.45);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.12);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --cyan: #06b6d4;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-display: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     body {
-      background-color: #070a11;
-      color: #e2e8f0;
-      letter-spacing: -0.015em;
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    ::-webkit-scrollbar {
-      width: 6px;
+    /* Ambient dynamic glows */
+    .ambient-mesh {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
-    ::-webkit-scrollbar-track {
-      background: #070a11;
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.16;
+      transition: opacity 0.5s ease;
     }
-    ::-webkit-scrollbar-thumb {
-      background: #1e293b;
-      border-radius: 3px;
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+      top: -150px;
+      left: -100px;
+      animation: floatOrb 22s ease-in-out infinite alternate;
+    }
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+      bottom: 10%;
+      right: -100px;
+      animation: floatOrb 18s ease-in-out infinite alternate-reverse;
+    }
+    .orb-3 {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+      top: 45%;
+      left: 30%;
+      animation: floatOrb 26s ease-in-out infinite alternate;
+    }
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.08); }
     }
 
-    .bg-grid {
-      background-size: 40px 40px;
+    /* Subtle geometric grid */
+    .subtle-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at 50% 20%, #000 60%, transparent 95%);
     }
 
-    .card-hover {
-      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    /* Layout Container */
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
     }
-    .card-hover:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      background: rgba(15, 23, 42, 0.7);
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(6, 9, 17, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.3s ease;
+    }
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .nav-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .nav-btn-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      color: #fff !important;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3);
+      transition: all 0.2s ease;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .nav-btn-resume:hover {
       transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.45);
     }
 
-    .title-gradient {
-      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 70%, #38bdf8 100%);
+    /* Mobile Menu Toggle */
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 8px;
+      color: #fff;
+      cursor: pointer;
+    }
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: rgba(6, 9, 17, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 20px;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 99;
+    }
+    .mobile-drawer.open {
+      display: flex;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding-top: 120px;
+      padding-bottom: 70px;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Profile Avatar Banner */
+    .avatar-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+    .profile-photo-ring {
+      position: relative;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #6366f1, #06b6d4, #10b981);
+      box-shadow: 0 4px 22px rgba(99, 102, 241, 0.4);
+      flex-shrink: 0;
+    }
+    .profile-photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #1e293b;
+      display: block;
+    }
+    .avatar-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #a5b4fc;
+      letter-spacing: 0.01em;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+      animation: pulseAnim 2s infinite;
+    }
+    @keyframes pulseAnim {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+
+    /* Refined Typography (Rock-solid, zero layout shift) */
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4.8vw, 56px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      contain: layout style;
+    }
+    .hero-name-gradient {
+      background: linear-gradient(90deg, #ffffff 0%, #38bdf8 25%, #c084fc 50%, #34d399 75%, #ffffff 100%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textShimmer 4s ease-in-out infinite alternate;
+      display: inline-block;
+      white-space: nowrap;
+      transition: filter 0.3s ease, transform 0.2s ease;
+      will-change: background-position;
+    }
+    .hero-name-gradient:hover {
+      filter: drop-shadow(0 0 16px rgba(99, 102, 241, 0.55));
+      transform: translateY(-1px);
+    }
+    @keyframes textShimmer {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(17px, 2.2vw, 22px);
+      font-weight: 500;
+      color: #94a3b8;
+      letter-spacing: -0.01em;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      contain: layout style;
+    }
+    .dynamic-typed-wrap {
+      display: inline-block;
+      min-width: 250px;
+      white-space: nowrap;
+    }
+    .dynamic-typed-text {
+      color: #38bdf8;
+      font-weight: 600;
+      border-bottom: 2px solid rgba(56, 189, 248, 0.35);
+      padding-bottom: 1px;
+    }
+    .typewriter-cursor {
+      color: #a5b4fc;
+      font-weight: 300;
+      animation: blinkCursor 0.9s infinite;
+      margin-left: 2px;
+    }
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .hero-bio {
+      color: #94a3b8;
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 580px;
+    }
+    .hero-bio strong {
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(79, 70, 229, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(79, 70, 229, 0.5);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: #e2e8f0;
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Stat Cards Grid (Elegant, Refined Digits) */
+    .hero-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .stat-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+    }
+    .stat-box:hover {
+      background: var(--card-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-3px);
+    }
+    .stat-platform-tag {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    /* Elegant modern digits styling */
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+    .stat-badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-top: 4px;
+    }
+    .badge-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25); }
+    .badge-indigo { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.25); }
+    .badge-emerald { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25); }
+    .badge-cyan { background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.25); }
+    .stat-subtext {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* Section Headers */
+    .section-wrap {
+      padding: 60px 0;
+      position: relative;
+    }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 14px;
+      height: 2px;
+      background: #38bdf8;
+      border-radius: 2px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 15px;
+      max-width: 580px;
+      margin-bottom: 36px;
+    }
+
+    /* Experience Card */
+    .experience-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-left: 3px solid #6366f1;
+      border-radius: 18px;
+      padding: 26px;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+    }
+    .experience-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .exp-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .exp-company {
+      font-size: 14px;
+      color: #38bdf8;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .exp-period {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .exp-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .exp-points li {
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.6;
+      padding-left: 18px;
+      position: relative;
+    }
+    .exp-points li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: #6366f1;
+    }
+
+    /* Featured Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 22px;
+    }
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    .project-card-featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 27, 75, 0.2) 100%);
+    }
+    .project-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .tag-blue { background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25); }
+    .tag-purple { background: rgba(168, 85, 247, 0.12); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25); }
+    .tag-emerald { background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25); }
+    .tag-rose { background: rgba(244, 63, 94, 0.12); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.25); }
+    .tag-amber { background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25); }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .project-summary {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .project-metrics-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 16px;
+    }
+    .metric-pill {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+    }
+    .metric-highlight {
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.2);
+      background: rgba(56, 189, 248, 0.06);
+    }
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .tech-pill {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 2px 8px;
+      border-radius: 5px;
+    }
+
+    /* Inspect Button */
+    .btn-inspect {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 9px 14px;
+      border-radius: 9px;
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      font-size: 12.5px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-inspect:hover {
+      background: rgba(99, 102, 241, 0.16);
+      border-color: rgba(99, 102, 241, 0.4);
+      color: #ffffff;
+    }
+
+    /* Modal for Detailed Project Case Study */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(3, 5, 10, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .modal-backdrop.active {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-dialog {
+      background: #0b1120;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 800px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      transform: scale(0.96);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-backdrop.active .modal-dialog {
+      transform: scale(1);
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(1.08);
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .modal-subtitle {
+      font-size: 13.5px;
+      color: #38bdf8;
+      margin-bottom: 24px;
+    }
+    .modal-section {
+      margin-bottom: 22px;
+    }
+    .modal-section-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-section-title i {
+      color: #6366f1;
+    }
+    .modal-text {
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .modal-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .modal-metric-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .modal-metric-val {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+    .modal-metric-lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .arch-diagram-box {
+      background: #060a14;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 18px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.8;
+      color: #a5b4fc;
+      overflow-x: auto;
+    }
+
+    /* Skills Clean Categorized Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .skill-category-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+    }
+    .skill-cat-title {
+      font-family: var(--font-display);
+      font-size: 13.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #94a3b8;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-item-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 8px;
+      padding: 6px 11px;
+      font-size: 12.5px;
+      color: #e2e8f0;
+      transition: all 0.2s ease;
+    }
+    .skill-item-pill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
+    }
+    .skill-item-pill i {
+      font-size: 17px;
+    }
+
+    /* Certifications Grid */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .cert-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      backdrop-filter: blur(12px);
+      transition: all 0.2s ease;
+    }
+    .cert-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(255, 255, 255, 0.14);
+      transform: translateY(-2px);
+    }
+    .cert-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 19px;
+    }
+    .cert-name {
+      font-family: var(--font-display);
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .cert-issuer {
+      font-size: 12.5px;
+      color: #38bdf8;
+      font-weight: 500;
+    }
+    .cert-meta {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* Interactive Terminal / Console Feature */
+    .terminal-container {
+      background: #050811;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      font-family: var(--font-mono);
+    }
+    .terminal-header {
+      background: #0d1322;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .terminal-dots {
+      display: flex;
+      gap: 7px;
+    }
+    .t-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .terminal-title {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+    .terminal-body {
+      padding: 18px;
+      min-height: 240px;
+      max-height: 380px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .terminal-history {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .t-prompt-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .t-user {
+      color: #34d399;
+      font-weight: 600;
+    }
+    .t-at {
+      color: var(--text-dim);
+    }
+    .t-path {
+      color: #38bdf8;
+    }
+    .terminal-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .terminal-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #f8fafc;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+    .quick-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .quick-chip {
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 11.5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .quick-chip:hover {
+      background: rgba(99, 102, 241, 0.25);
+      color: #fff;
+    }
+
+    /* Contact Section (Hidden Mobile Number as requested) */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 27, 75, 0.3) 100%);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 20px;
+      padding: 36px;
+      text-align: center;
+    }
+    .contact-links-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .contact-link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .contact-link-pill:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+
+    /* Responsive Mobile Media Queries */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .project-card-featured {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .hero-section {
+        padding-top: 96px;
+        padding-bottom: 40px;
+      }
+      .hero-stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .stat-box {
+        padding: 14px;
+      }
+      .stat-num {
+        font-size: 26px;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .certs-grid {
+        grid-template-columns: 1fr;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .modal-dialog {
+        padding: 20px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .avatar-wrapper {
+        flex-direction: row;
+      }
     }
   </style>
 </head>
-<body class="antialiased selection:bg-sky-500 selection:text-white min-h-screen flex flex-col font-sans">
+<body>
 
-  <!-- Subtle ambient glow -->
-  <div class="fixed top-0 left-1/3 w-[600px] h-[400px] bg-sky-500/[0.07] rounded-full blur-[140px] pointer-events-none -z-10"></div>
-  <div class="fixed bottom-1/4 right-1/4 w-[500px] h-[350px] bg-indigo-500/[0.05] rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-mesh">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="subtle-grid"></div>
 
-  <!-- MINIMAL HEADER -->
-  <header class="sticky top-0 z-40 w-full bg-[#070a11]/85 backdrop-blur-md border-b border-white/[0.06]">
-    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-      
-      <!-- Brand -->
-      <a href="#top" class="flex items-center gap-2.5 group">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center font-bold text-white text-xs shadow-sm">
-          SM
-        </div>
-        <div>
-          <span class="font-semibold text-sm text-white group-hover:text-sky-400 transition-colors">Miryala Sriman</span>
-          <span class="block text-[10px] text-emerald-400 font-mono">Apprentice @ DBS Bank</span>
-        </div>
-      </a>
-
-      <!-- Compact Nav -->
-      <nav class="hidden md:flex items-center gap-6 text-xs text-slate-400 font-medium">
-        <a href="#projects" class="hover:text-white transition-colors">Projects</a>
-        <a href="#experience" class="hover:text-white transition-colors">Experience</a>
-        <a href="#stats" class="hover:text-white transition-colors">Ratings</a>
-        <a href="#skills" class="hover:text-white transition-colors">Stack</a>
-      </nav>
-
-      <!-- Right CTAs -->
-      <div class="flex items-center gap-3">
-        <button onclick="openResumeModal()" class="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-white/[0.08] rounded-lg transition-all flex items-center gap-1.5">
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-sky-400"></i>
-          <span>Resume</span>
-        </button>
-
-        <a href="mailto:srimanmiryala9@gmail.com" class="px-3.5 py-1.5 text-xs font-semibold text-white bg-sky-500 hover:bg-sky-400 rounded-lg transition-all shadow-sm">
-          Contact
+  <!-- Header / Navigation -->
+  <header>
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="#hero" class="nav-logo">
+          <div class="nav-logo-badge">SM</div>
+          <span>Sriman Miryala</span>
         </a>
-      </div>
 
+        <!-- Desktop Navigation -->
+        <ul class="nav-menu">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#cp" class="nav-link">Competitive</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#certifications" class="nav-link">Certifications</a></li>
+          <li><a href="#terminal" class="nav-link">Console</a></li>
+          <li>
+            <a href="resume.pdf" target="_blank" class="nav-btn-resume" title="Open PDF Resume">
+              <i data-lucide="file-text" style="width: 15px; height: 15px;"></i>
+              <span>Resume</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu" id="menuIcon" style="width: 20px; height: 20px;"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="#about" class="nav-link mobile-link">About</a>
+      <a href="#experience" class="nav-link mobile-link">Experience</a>
+      <a href="#projects" class="nav-link mobile-link">Projects</a>
+      <a href="#cp" class="nav-link mobile-link">Competitive Programming</a>
+      <a href="#skills" class="nav-link mobile-link">Skills</a>
+      <a href="#certifications" class="nav-link mobile-link">Certifications</a>
+      <a href="#terminal" class="nav-link mobile-link">Console</a>
+      <a href="resume.pdf" target="_blank" class="nav-btn-resume" style="justify-content: center; margin-top: 8px;">
+        <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+        <span>Download Resume (PDF)</span>
+      </a>
     </div>
   </header>
 
-  <!-- MAIN BODY (CLEAN, AIRY, NON-BULKY) -->
-  <main class="flex-1 w-full bg-grid max-w-5xl mx-auto px-6 py-12 md:py-20 space-y-20">
+  <!-- Main Container -->
+  <main class="container">
 
-    <!-- HERO SECTION (CLEAN & PUNCHY) -->
-    <section id="top" class="space-y-6">
-      
-      <!-- Status Badge -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-white/[0.08] text-xs text-slate-300">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>Software Engineer Apprentice @ <strong class="text-white">DBS Bank Technology</strong></span>
-      </div>
-
-      <!-- Headline -->
-      <h1 class="text-4xl sm:text-6xl font-bold tracking-tight title-gradient max-w-3xl leading-[1.1]">
-        Building Scalable Systems &amp; High-Speed Deep Learning.
-      </h1>
-
-      <!-- Crisp Bio (2 sentences only - zero bulky fluff) -->
-      <p class="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
-        Computer Science student at <span class="text-slate-200 font-medium">Vasavi College of Engineering</span> ('27, CGPA 8.03). 
-        <strong class="text-amber-300 font-medium">LeetCode Knight (Peak 1989, Top 3%)</strong> and <strong class="text-cyan-300 font-medium">Codeforces Specialist (1503)</strong> with 1,500+ solved algorithmic challenges.
-      </p>
-
-      <!-- Key Proof Points Bento Row -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/[0.07]">
-          <span class="text-[10px] font-mono text-slate-500 uppercase block">LeetCode</span>
-          <span class="text-xl font-bold text-amber-400">1989</span>
-          <span class="text-[11px] text-slate-400 block mt-0.5">Knight &bull; Top 3%</span>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/[0.07]">
-          <span class="text-[10px] font-mono text-slate-500 uppercase block">Codeforces</span>
-          <span class="text-xl font-bold text-cyan-400">1503</span>
-          <span class="text-[11px] text-slate-400 block mt-0.5">Specialist (Cyan)</span>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/[0.07]">
-          <span class="text-[10px] font-mono text-slate-500 uppercase block">Solved Volume</span>
-          <span class="text-xl font-bold text-emerald-400">1,500+</span>
-          <span class="text-[11px] text-slate-400 block mt-0.5">DSA Challenges</span>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/[0.07]">
-          <span class="text-[10px] font-mono text-slate-500 uppercase block">TS EAMCET '23</span>
-          <span class="text-xl font-bold text-purple-400">#2,245</span>
-          <span class="text-[11px] text-slate-400 block mt-0.5">Top 1% of 224k</span>
-        </div>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400 pt-2">
-        <a href="https://leetcode.com/u/Srimanmiryala" target="_blank" class="hover:text-amber-300 transition-colors flex items-center gap-1">
-          <span>leetcode.com/u/Srimanmiryala</span>
-          <i data-lucide="external-link" class="w-3 h-3 text-slate-600"></i>
-        </a>
-        <span>&bull;</span>
-        <a href="https://codeforces.com/profile/Srimanmiryala" target="_blank" class="hover:text-cyan-300 transition-colors flex items-center gap-1">
-          <span>codeforces.com/profile/Srimanmiryala</span>
-          <i data-lucide="external-link" class="w-3 h-3 text-slate-600"></i>
-        </a>
-        <span>&bull;</span>
-        <a href="https://github.com/srimanmiryala" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">
-          <span>github.com/srimanmiryala</span>
-          <i data-lucide="external-link" class="w-3 h-3 text-slate-600"></i>
-        </a>
-      </div>
-
-    </section>
-
-    <!-- FLAGSHIP PROJECTS (CLEAN BENTO CARDS, CRISP METRICS, ZERO BULK) -->
-    <section id="projects" class="space-y-6">
-      <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
-        <h2 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
-          <span>Featured Projects</span>
-          <span class="text-xs font-mono font-normal text-slate-500">(3 Flagship Implementations)</span>
-        </h2>
-        <span class="text-xs text-sky-400 font-mono">Quantified Benchmarks</span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- ═══════════════════════════════════════════
+         HERO SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="hero" class="hero-section">
+      <div class="hero-grid">
         
-        <!-- Project 1: Real-Time Collaborative Coding -->
-        <div class="p-5 rounded-2xl bg-slate-900/40 border border-white/[0.07] card-hover flex flex-col justify-between space-y-4">
-          <div class="space-y-2.5">
-            <div class="flex justify-between items-center">
-              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Top 10 / 100+ Teams</span>
-              <span class="text-[11px] font-mono text-slate-500">2025</span>
+        <!-- Left: Intro & Bio -->
+        <div class="hero-left">
+          
+          <!-- Avatar + Status Banner -->
+          <div class="avatar-wrapper">
+            <div class="profile-photo-ring">
+              <img 
+                src="profile.jpg" 
+                alt="Sriman Miryala" 
+                class="profile-photo"
+                onerror="this.onerror=null; this.src='https://github.com/Srimanmiryala.png';" 
+              />
             </div>
-            <h3 class="text-base font-bold text-white">Real-Time Collaborative Coding</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Multi-user live editing platform with Redis Pub/Sub syncing sessions and sub-50ms WebSocket round-trip propagation.
-            </p>
-            
-            <!-- Crisp Metrics -->
-            <div class="pt-2 grid grid-cols-2 gap-2 text-[11px] font-mono">
-              <div class="p-2 rounded-lg bg-black/30 border border-white/[0.04]">
-                <span class="text-sky-400 font-bold block">40% Less</span>
-                <span class="text-slate-500 text-[10px]">Connection load</span>
-              </div>
-              <div class="p-2 rounded-lg bg-black/30 border border-white/[0.04]">
-                <span class="text-emerald-400 font-bold block">&lt;50ms</span>
-                <span class="text-slate-500 text-[10px]">Sync latency</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-3 border-t border-white/[0.05] flex flex-wrap gap-1.5 text-[10px] font-mono text-slate-400">
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">FastAPI</span>
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">Redis</span>
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">WebSockets</span>
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">Docker CI/CD</span>
-          </div>
-        </div>
-
-        <!-- Project 2: ResU-Net Topology Optimization -->
-        <div class="p-5 rounded-2xl bg-slate-900/40 border border-white/[0.07] card-hover flex flex-col justify-between space-y-4">
-          <div class="space-y-2.5">
-            <div class="flex justify-between items-center">
-              <span class="text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">Deep Learning</span>
-              <span class="text-[11px] font-mono text-slate-500">PyTorch</span>
-            </div>
-            <h3 class="text-base font-bold text-white">ResU-Net Topology Optimization</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Residual encoder-decoder surrogate replacing traditional numeric PDE solvers with 10x faster CUDA AMP training.
-            </p>
-            
-            <!-- Crisp Metrics -->
-            <div class="pt-2 grid grid-cols-2 gap-2 text-[11px] font-mono">
-              <div class="p-2 rounded-lg bg-black/30 border border-white/[0.04]">
-                <span class="text-purple-400 font-bold block">350x Faster</span>
-                <span class="text-slate-500 text-[10px]">Inference speed</span>
-              </div>
-              <div class="p-2 rounded-lg bg-black/30 border border-white/[0.04]">
-                <span class="text-indigo-400 font-bold block">0.89 Dice</span>
-                <span class="text-slate-500 text-[10px]">Ground-truth score</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-3 border-t border-white/[0.05] flex flex-wrap gap-1.5 text-[10px] font-mono text-slate-400">
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">PyTorch</span>
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">CUDA AMP</span>
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">ResU-Net</span>
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">React</span>
-          </div>
-        </div>
-
-        <!-- Project 3: Constraint Scheduling Engine -->
-        <div class="p-5 rounded-2xl bg-slate-900/40 border border-white/[0.07] card-hover flex flex-col justify-between space-y-4">
-          <div class="space-y-2.5">
-            <div class="flex justify-between items-center">
-              <span class="text-[10px] font-mono text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">CSP &amp; Graphs</span>
-              <span class="text-[11px] font-mono text-slate-500">Python</span>
-            </div>
-            <h3 class="text-base font-bold text-white">Constraint Scheduling Engine</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Automated timetable generator modeling 50+ hard constraints with graph coloring and AC-3 consistency pruning.
-            </p>
-            
-            <!-- Crisp Metrics -->
-            <div class="pt-2 grid grid-cols-2 gap-2 text-[11px] font-mono">
-              <div class="p-2 rounded-lg bg-black/30 border border-white/[0.04]">
-                <span class="text-emerald-400 font-bold block">99.7%</span>
-                <span class="text-slate-500 text-[10px]">Conflict-free</span>
-              </div>
-              <div class="p-2 rounded-lg bg-black/30 border border-white/[0.04]">
-                <span class="text-sky-400 font-bold block">60% Faster</span>
-                <span class="text-slate-500 text-[10px]">Than brute force</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-3 border-t border-white/[0.05] flex flex-wrap gap-1.5 text-[10px] font-mono text-slate-400">
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">Python</span>
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">CSP</span>
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">Graph Coloring</span>
-            <span class="bg-slate-800/80 px-2 py-0.5 rounded">AC-3</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- EXPERIENCE & EDUCATION (CLEAN LIST FORMAT) -->
-    <section id="experience" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      
-      <!-- Work Experience -->
-      <div class="space-y-4">
-        <h2 class="text-base font-bold text-white tracking-tight flex items-center gap-2 border-b border-white/[0.06] pb-2">
-          <i data-lucide="briefcase" class="w-4 h-4 text-emerald-400"></i>
-          <span>Experience</span>
-        </h2>
-
-        <div class="p-4 rounded-xl bg-slate-900/40 border border-white/[0.07] space-y-2">
-          <div class="flex justify-between items-start">
             <div>
-              <h3 class="text-sm font-bold text-white">Software Engineer Apprentice</h3>
-              <p class="text-xs text-emerald-400 font-medium">DBS Bank Technology</p>
+              <div class="avatar-status-pill">
+                <span class="pulse-dot"></span>
+                Apprentice @ DBS Bank Technology
+              </div>
+              <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px; padding-left: 4px;">
+                Graduating 2027 · Open to SDE &amp; AI Roles
+              </div>
             </div>
-            <span class="text-[10px] font-mono text-slate-500">Jun 2026 – Present</span>
           </div>
-          <ul class="text-xs text-slate-400 space-y-1 list-disc list-inside pt-1">
-            <li>Application security labs &amp; common cyber attack defense.</li>
-            <li>Enterprise tech stacks: Spring Boot &amp; structured DevOps.</li>
-          </ul>
+
+          <!-- Name & Headline with Dynamic Interaction -->
+          <h1 class="hero-name">
+            Hi, I'm <span class="hero-name-gradient" id="heroNameDynamic">Sriman Miryala</span>
+          </h1>
+
+          <p class="hero-headline">
+            I'm a <span class="dynamic-typed-wrap"><span id="dynamicTypewriter" class="dynamic-typed-text">Software Engineer</span><span class="typewriter-cursor">|</span></span>
+          </p>
+
+          <p class="hero-bio">
+            Computer Science undergraduate at <strong>Vasavi College of Engineering</strong> (GPA 8.03).
+            Passionate about building low-latency real-time distributed backends, AI/ML pipelines,
+            and scalable web platforms. Solved <strong>1,500+ algorithmic challenges</strong> globally.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <i data-lucide="layers" style="width: 16px; height: 16px;"></i>
+              <span>Explore Projects</span>
+            </a>
+            <a href="resume.pdf" target="_blank" class="btn btn-outline" title="Open uploaded resume PDF">
+              <i data-lucide="file-down" style="width: 16px; height: 16px;"></i>
+              <span>View Resume</span>
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <i data-lucide="send" style="width: 16px; height: 16px;"></i>
+              <span>Contact</span>
+            </a>
+          </div>
+
+          <!-- Social Quick Links -->
+          <div style="display: flex; gap: 10px; margin-top: 4px;">
+            <a href="https://github.com/Srimanmiryala" target="_blank" class="skill-item-pill" title="GitHub Profile">
+              <i class="devicon-github-original"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/sriman-miry3549651b6" target="_blank" class="skill-item-pill" title="LinkedIn Profile">
+              <i class="devicon-linkedin-plain colored"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://leetcode.com/u/Srimanmiryala" target="_blank" class="skill-item-pill" title="LeetCode Profile">
+              <span style="color:#f59e0b; font-weight:700; font-family:var(--font-mono); font-size:11px;">LC</span>
+              <span>LeetCode</span>
+            </a>
+            <a href="https://codeforces.com/profile/Srimanmiryala" target="_blank" class="skill-item-pill" title="Codeforces Profile">
+              <span style="color:#6366f1; font-weight:700; font-family:var(--font-mono); font-size:11px;">CF</span>
+              <span>Codeforces</span>
+            </a>
+          </div>
+
         </div>
-      </div>
 
-      <!-- Education -->
-      <div class="space-y-4">
-        <h2 class="text-base font-bold text-white tracking-tight flex items-center gap-2 border-b border-white/[0.06] pb-2">
-          <i data-lucide="graduation-cap" class="w-4 h-4 text-sky-400"></i>
-          <span>Education</span>
-        </h2>
-
-        <div class="p-4 rounded-xl bg-slate-900/40 border border-white/[0.07] space-y-1.5">
-          <div class="flex justify-between items-baseline">
-            <h3 class="text-sm font-bold text-white">Vasavi College of Engineering</h3>
-            <span class="text-[10px] font-mono text-emerald-400 font-bold">GPA 8.03</span>
+        <!-- Right: Stat Cards (Refined, Beautiful Digits) -->
+        <div class="hero-stats-grid">
+          
+          <!-- LeetCode Knight -->
+          <div class="stat-box">
+            <div class="stat-platform-tag">
+              <span>LeetCode</span>
+              <span class="stat-badge badge-amber">Knight</span>
+            </div>
+            <div class="stat-num" style="color: #fbbf24;">1989</div>
+            <div class="stat-subtext">
+              Peak Contest Rating<br>
+              <strong>Top 3%</strong> Worldwide
+            </div>
           </div>
-          <p class="text-xs text-slate-400">B.Tech, Computer Science and Engineering &bull; 2023 – 2027</p>
-          <p class="text-[11px] text-slate-500 font-mono">DSA, OS, Distributed Systems, DBMS, Networks</p>
 
-          <div class="pt-2 mt-2 border-t border-white/[0.04] flex justify-between items-baseline text-xs">
-            <span class="text-slate-300">Narayana Junior College (Intermediate MPC)</span>
-            <span class="text-indigo-400 font-mono font-bold">98.1%</span>
+          <!-- Codeforces Specialist -->
+          <div class="stat-box">
+            <div class="stat-platform-tag">
+              <span>Codeforces</span>
+              <span class="stat-badge badge-indigo">Specialist</span>
+            </div>
+            <div class="stat-num" style="color: #a5b4fc;">1503</div>
+            <div class="stat-subtext">
+              Peak Contest Rating<br>
+              Div. 2/3 Regular Competitor
+            </div>
           </div>
+
+          <!-- Problems Solved -->
+          <div class="stat-box">
+            <div class="stat-platform-tag">
+              <span>Problem Solving</span>
+              <span class="stat-badge badge-emerald">Verified</span>
+            </div>
+            <div class="stat-num" style="color: #34d399;">1,500+</div>
+            <div class="stat-subtext">
+              Challenges Solved across<br>
+              LeetCode, CF, CodeChef
+            </div>
+          </div>
+
+          <!-- TS EAMCET -->
+          <div class="stat-box">
+            <div class="stat-platform-tag">
+              <span>TS EAMCET</span>
+              <span class="stat-badge badge-cyan">Top 1%</span>
+            </div>
+            <div class="stat-num" style="color: #38bdf8;">#2,245</div>
+            <div class="stat-subtext">
+              State Rank among<br>
+              224,000+ Aspirants
+            </div>
+          </div>
+
         </div>
-      </div>
 
+      </div>
     </section>
 
-    <!-- CLEAN TECH STACK (MINIMALIST LOGO PILL ROW) -->
-    <section id="skills" class="space-y-4">
-      <div class="flex items-center justify-between border-b border-white/[0.06] pb-2">
-        <h2 class="text-base font-bold text-white tracking-tight flex items-center gap-2">
-          <i data-lucide="code" class="w-4 h-4 text-sky-400"></i>
-          <span>Technical Arsenal</span>
-        </h2>
-        <span class="text-[11px] font-mono text-slate-500">Zero Progress Bars &bull; Clean Verified Stack</span>
-      </div>
+    <!-- ═══════════════════════════════════════════
+         ABOUT SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="about" class="section-wrap">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">Background &amp; Philosophy</h2>
+      <p class="section-desc">Understanding software from internal mechanics to scalable user-facing systems.</p>
 
-      <div class="flex flex-wrap gap-2 text-xs">
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-python-plain colored text-base"></i>
-          <span>Python</span>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; align-items: center;">
+        
+        <!-- About Profile Card -->
+        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; backdrop-filter: blur(14px); display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; gap: 18px; align-items: center;">
+            <div style="width: 76px; height: 76px; border-radius: 20px; overflow: hidden; border: 2px solid rgba(99, 102, 241, 0.4); flex-shrink: 0; box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);">
+              <img src="profile.jpg" alt="Sriman Miryala" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://github.com/Srimanmiryala.png';" />
+            </div>
+            <div>
+              <div style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #fff;">Sriman Miryala</div>
+              <div style="font-size: 13px; color: #38bdf8; font-weight: 500;">B.Tech Computer Science &amp; Engineering</div>
+              <div style="font-size: 12px; color: var(--text-dim); margin-top: 2px;">Vasavi College of Engineering · GPA 8.03</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 4px;">
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 10px 12px; border-radius: 10px;">
+              <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Location</div>
+              <div style="font-size: 13px; font-weight: 600; color: #e2e8f0; margin-top: 2px;">Hyderabad, India 🇮🇳</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 10px 12px; border-radius: 10px;">
+              <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Graduation</div>
+              <div style="font-size: 13px; font-weight: 600; color: #e2e8f0; margin-top: 2px;">Class of 2027</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 10px 12px; border-radius: 10px;">
+              <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Career Paths</div>
+              <div style="font-size: 13px; font-weight: 600; color: #a5b4fc; margin-top: 2px;">SWE / SDE / AI-ML</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 10px 12px; border-radius: 10px;">
+              <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">TS EAMCET Rank</div>
+              <div style="font-size: 13px; font-weight: 600; color: #38bdf8; margin-top: 2px;">#2,245 (Top 1%)</div>
+            </div>
+          </div>
         </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-java-plain colored text-base"></i>
-          <span>Java</span>
+
+        <!-- About Text Narrative -->
+        <div style="color: #94a3b8; font-size: 14.5px; line-height: 1.75; display: flex; flex-direction: column; gap: 14px;">
+          <p>
+            I'm a Computer Science and Engineering student passionate about software engineering, algorithms, full-stack systems, and machine learning. I enjoy decomposing complex algorithmic challenges, designing low-latency backend architectures, and experimenting with intelligent AI applications.
+          </p>
+          <p>
+            My engineering philosophy centers on <strong style="color: #e2e8f0;">deep internal understanding</strong>: from frontend component lifecycles and event synchronization to relational data indexing, network packet flows, and model training dynamics.
+          </p>
+          <p>
+            With <strong>1,500+ problems solved</strong> (LeetCode Knight 1989, Codeforces Specialist 1503), I bring rigorous analytical problem-solving and structured code design to impactful, high-scale engineering challenges.
+          </p>
         </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-cplusplus-plain colored text-base"></i>
-          <span>C++</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-spring-plain colored text-base"></i>
-          <span>Spring Boot</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-fastapi-plain colored text-base"></i>
-          <span>FastAPI</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-redis-plain colored text-base"></i>
-          <span>Redis Pub/Sub</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-socketio-original colored text-base"></i>
-          <span>WebSockets</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-pytorch-original colored text-base"></i>
-          <span>PyTorch &amp; CUDA AMP</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-react-original colored text-base"></i>
-          <span>React.js</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-mysql-plain colored text-base"></i>
-          <span>SQL / MySQL</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-docker-plain colored text-base"></i>
-          <span>Docker</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-githubactions-plain colored text-base"></i>
-          <span>GitHub Actions CI/CD</span>
-        </div>
-        <div class="px-3 py-1.5 rounded-lg bg-slate-900/70 border border-white/[0.07] flex items-center gap-2 text-slate-300">
-          <i class="devicon-git-plain colored text-base"></i>
-          <span>Git</span>
-        </div>
+
       </div>
     </section>
 
-    <!-- CERTIFICATIONS & HONORS (CLEAN ROW) -->
-    <section class="space-y-3">
-      <div class="flex items-center justify-between border-b border-white/[0.06] pb-2">
-        <h2 class="text-base font-bold text-white tracking-tight flex items-center gap-2">
-          <i data-lucide="award" class="w-4 h-4 text-purple-400"></i>
-          <span>Certifications &amp; Accolades</span>
-        </h2>
-      </div>
+    <!-- ═══════════════════════════════════════════
+         EXPERIENCE
+    ═══════════════════════════════════════════ -->
+    <section id="experience" class="section-wrap">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">Professional Journey</h2>
+      <p class="section-desc">Practical engineering and building software in an enterprise technology setting.</p>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-        <div class="p-3.5 rounded-xl bg-slate-900/40 border border-white/[0.07] flex items-start gap-3">
-          <i data-lucide="shield-check" class="w-4 h-4 text-purple-400 shrink-0 mt-0.5"></i>
+      <div class="experience-card">
+        <div class="exp-header">
           <div>
-            <strong class="text-white block">Oracle Cloud Infrastructure Generative AI Professional</strong>
-            <span class="text-slate-400 text-[11px]">Oracle &bull; 2025</span>
+            <div class="exp-title">Software Engineer Apprentice</div>
+            <div class="exp-company">DBS Bank Technology</div>
           </div>
+          <div class="exp-period">Jun 2026 – Present · Hyderabad, India</div>
         </div>
-
-        <div class="p-3.5 rounded-xl bg-slate-900/40 border border-white/[0.07] flex items-start gap-3">
-          <i data-lucide="terminal" class="w-4 h-4 text-sky-400 shrink-0 mt-0.5"></i>
-          <div>
-            <strong class="text-white block">Python Essentials 1 &amp; 2</strong>
-            <span class="text-slate-400 text-[11px]">Cisco Networking Academy &bull; 2025</span>
-          </div>
+        <ul class="exp-points">
+          <li>Working within DBS Bank's Technology organization on software engineering and digital banking capabilities.</li>
+          <li>Developing backend APIs and services using scalable engineering best practices, microservice principles, and enterprise security.</li>
+          <li>Participating in agile sprints, collaborating with cross-functional engineering teams, and adhering to strict banking reliability standards.</li>
+        </ul>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px;">
+          <span class="tech-pill">Backend Architecture</span>
+          <span class="tech-pill">RESTful APIs</span>
+          <span class="tech-pill">Banking Tech</span>
+          <span class="tech-pill">Clean Architecture</span>
+          <span class="tech-pill">Agile</span>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT (MINIMAL & DIRECT) -->
-    <section id="contact" class="p-8 rounded-2xl bg-gradient-to-b from-slate-900/80 to-slate-950 border border-white/[0.08] text-center space-y-3">
-      <h2 class="text-xl font-bold text-white">Let's Connect</h2>
-      <p class="text-xs text-slate-400 max-w-md mx-auto">
-        Currently an Apprentice at DBS Bank Technology. Available for engineering discussions, algorithms, and 2027 software opportunities.
+    <!-- ═══════════════════════════════════════════
+         FEATURED PROJECTS (Brief summary + Case Study Modal)
+    ═══════════════════════════════════════════ -->
+    <section id="projects" class="section-wrap">
+      <div class="section-label">Featured Projects</div>
+      <h2 class="section-title">Engineered Applications &amp; AI Systems</h2>
+      <p class="section-desc">
+        Click <strong>"Inspect Case Study &amp; Architecture"</strong> on any project to view architectural design, event flows, and deep-dive technical achievements.
       </p>
 
-      <div class="flex flex-wrap justify-center items-center gap-3 pt-2">
-        <a href="mailto:srimanmiryala9@gmail.com" class="px-4 py-2 text-xs font-semibold text-white bg-sky-500 hover:bg-sky-400 rounded-lg transition-colors flex items-center gap-1.5">
-          <i data-lucide="mail" class="w-3.5 h-3.5"></i>
-          <span>srimanmiryala9@gmail.com</span>
-        </a>
-        <a href="tel:+919030243813" class="px-3.5 py-2 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 border border-white/[0.08] rounded-lg transition-colors flex items-center gap-1.5">
-          <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span>+91 9030243813</span>
-        </a>
-        <button onclick="copyEmail()" id="copyBtn" class="px-3.5 py-2 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 border border-white/[0.08] rounded-lg transition-colors flex items-center gap-1.5">
-          <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-          <span id="copyText">Copy</span>
-        </button>
+      <div class="projects-grid">
+
+        <!-- 1. Collaborative Code Editor (Featured Spanning Card) -->
+        <div class="project-card project-card-featured">
+          <div>
+            <span class="project-tag tag-blue">Full-Stack · Real-Time Systems</span>
+            <h3 class="project-name">Real-Time Collaborative Code Editor</h3>
+            <p class="project-summary">
+              A high-concurrency shared coding platform supporting simultaneous multi-cursor remote editing, real-time syntax checking via Monaco Editor, and Redis-backed room state synchronization.
+            </p>
+            <div class="project-metrics-row">
+              <span class="metric-pill metric-highlight">&lt; 50ms Sync Latency</span>
+              <span class="metric-pill">40% Less Network Overhead</span>
+              <span class="metric-pill">Top 10 GenAI Hackathon 2025</span>
+            </div>
+            <div class="tech-pills">
+              <span class="tech-pill">React.js</span>
+              <span class="tech-pill">Monaco Editor</span>
+              <span class="tech-pill">Socket.IO</span>
+              <span class="tech-pill">Node.js</span>
+              <span class="tech-pill">Redis</span>
+              <span class="tech-pill">Docker</span>
+            </div>
+            <button class="btn-inspect" onclick="openProjectModal('collab-editor')">
+              <span>Inspect Case Study &amp; Architecture</span>
+              <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+            </button>
+          </div>
+
+          <!-- Featured Mini Diagram Preview -->
+          <div style="display: flex; flex-direction: column; justify-content: center;">
+            <div class="arch-diagram-box">
+              <div style="color: #64748b; margin-bottom: 6px;">// Event Synchronization Pipeline</div>
+              <div><span style="color:#34d399;">Client</span> ──(WS Delta)──&gt; <span style="color:#38bdf8;">Socket.IO</span></div>
+              <div style="padding-left: 20px;">│ (Debounced broadcast)</div>
+              <div><span style="color:#f59e0b;">Redis</span> ◄──(Pub/Sub)──── <span style="color:#38bdf8;">Cluster Node</span></div>
+              <div style="padding-left: 20px;">▼ (Conflict resolution)</div>
+              <div><span style="color:#c084fc;">Peers</span> ◄──(Batch update)── <span style="color:#34d399;">&lt; 50ms ACK</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. ResU-Net Deep Learning -->
+        <div class="project-card">
+          <div>
+            <span class="project-tag tag-purple">AI / Deep Learning · Vision</span>
+            <h3 class="project-name">ResU-Net Medical Segmentation</h3>
+            <p class="project-summary">
+              Deep residual U-Net architecture designed for high-precision biomedical image boundary segmentation with CUDA AMP mixed-precision acceleration.
+            </p>
+            <div class="project-metrics-row">
+              <span class="metric-pill metric-highlight">0.89 Dice Score</span>
+              <span class="metric-pill">350× Faster Inference</span>
+              <span class="metric-pill">10× CUDA AMP Training</span>
+            </div>
+            <div class="tech-pills">
+              <span class="tech-pill">PyTorch</span>
+              <span class="tech-pill">CUDA AMP</span>
+              <span class="tech-pill">ResNet-34</span>
+              <span class="tech-pill">OpenCV</span>
+            </div>
+          </div>
+          <button class="btn-inspect" onclick="openProjectModal('resunet')">
+            <span>Inspect Case Study &amp; Architecture</span>
+            <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+          </button>
+        </div>
+
+        <!-- 3. Machine Unlearning -->
+        <div class="project-card">
+          <div>
+            <span class="project-tag tag-rose">AI Research · Model Privacy</span>
+            <h3 class="project-name">Machine Unlearning System</h3>
+            <p class="project-summary">
+              Implementation of algorithmic unlearning enabling selective removal of sensitive training data points from pre-trained neural networks without full retraining from scratch.
+            </p>
+            <div class="project-metrics-row">
+              <span class="metric-pill metric-highlight">Privacy Preserving</span>
+              <span class="metric-pill">98% Retention Rate</span>
+              <span class="metric-pill">Targeted Forgetting</span>
+            </div>
+            <div class="tech-pills">
+              <span class="tech-pill">PyTorch</span>
+              <span class="tech-pill">Scikit-learn</span>
+              <span class="tech-pill">Gradient Ascent</span>
+              <span class="tech-pill">Python</span>
+            </div>
+          </div>
+          <button class="btn-inspect" onclick="openProjectModal('unlearning')">
+            <span>Inspect Case Study &amp; Architecture</span>
+            <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+          </button>
+        </div>
+
+        <!-- 4. Smart Timetable Maker -->
+        <div class="project-card">
+          <div>
+            <span class="project-tag tag-emerald">Algorithms · Optimization</span>
+            <h3 class="project-name">Constraint Timetable Maker</h3>
+            <p class="project-summary">
+              Automated institutional scheduling engine handling multi-tier constraints (faculty availability, lab capacities, clash prevention) using heuristic optimization.
+            </p>
+            <div class="project-metrics-row">
+              <span class="metric-pill metric-highlight">99.7% Conflict-Free</span>
+              <span class="metric-pill">60× Faster than Brute</span>
+            </div>
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">Genetic Heuristics</span>
+              <span class="tech-pill">Constraint Satisfaction</span>
+              <span class="tech-pill">Tkinter / CLI</span>
+            </div>
+          </div>
+          <button class="btn-inspect" onclick="openProjectModal('timetable')">
+            <span>Inspect Case Study &amp; Architecture</span>
+            <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+          </button>
+        </div>
+
+        <!-- 5. AI Movie Recommendation System -->
+        <div class="project-card">
+          <div>
+            <span class="project-tag tag-blue">AI / LLM · Full-Stack</span>
+            <h3 class="project-name">AI Movie Discovery &amp; Recommendation</h3>
+            <p class="project-summary">
+              Intelligent recommendation web application integrating TMDb API with Google Gemini LLM for conversational discovery and vector similarity filtering.
+            </p>
+            <div class="project-metrics-row">
+              <span class="metric-pill metric-highlight">Gemini 1.5 Integration</span>
+              <span class="metric-pill">Real-time TMDb Feed</span>
+            </div>
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">Flask</span>
+              <span class="tech-pill">Gemini AI</span>
+              <span class="tech-pill">REST APIs</span>
+            </div>
+          </div>
+          <button class="btn-inspect" onclick="openProjectModal('movie-rec')">
+            <span>Inspect Case Study &amp; Architecture</span>
+            <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+          </button>
+        </div>
+
+        <!-- 6. Real Estate Geospatial Platform -->
+        <div class="project-card">
+          <div>
+            <span class="project-tag tag-amber">Geospatial · Full-Stack</span>
+            <h3 class="project-name">Real Estate Maps Discovery</h3>
+            <p class="project-summary">
+              Property discovery platform with interactive Google Maps integration, radius search filters, geospatial clustering, and authenticated seller listings.
+            </p>
+            <div class="project-metrics-row">
+              <span class="metric-pill metric-highlight">Google Maps API</span>
+              <span class="metric-pill">Geo-Spatial Filtering</span>
+            </div>
+            <div class="tech-pills">
+              <span class="tech-pill">React.js</span>
+              <span class="tech-pill">Node.js</span>
+              <span class="tech-pill">Express</span>
+              <span class="tech-pill">MongoDB</span>
+            </div>
+          </div>
+          <button class="btn-inspect" onclick="openProjectModal('real-estate')">
+            <span>Inspect Case Study &amp; Architecture</span>
+            <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         COMPETITIVE PROGRAMMING SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="cp" class="section-wrap">
+      <div class="section-label">Competitive Programming</div>
+      <h2 class="section-title">Algorithmic Excellence</h2>
+      <p class="section-desc">Demonstrated problem-solving rigor across verified competitive platforms.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px;">
+        
+        <!-- LeetCode Card -->
+        <div class="stat-box" style="border-top: 3px solid #f59e0b;">
+          <div class="stat-platform-tag">
+            <span>LeetCode Official</span>
+            <span class="stat-badge badge-amber">Knight Status</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 10px;">
+            <span class="stat-num" style="color: #fbbf24;">1989</span>
+            <span style="font-size: 13px; color: var(--text-muted);">Peak Rating</span>
+          </div>
+          <div class="stat-subtext" style="margin-top: 10px;">
+            • Ranked <strong>#936</strong> out of 20,000+ (Biweekly Contest 177)<br>
+            • Ranked <strong>#1331</strong> out of 25,000+ (Weekly Contest 501)<br>
+            • <strong>Top 3%</strong> globally among active competitive coders<br>
+            • Profile: <a href="https://leetcode.com/u/Srimanmiryala" target="_blank" style="color: #38bdf8; text-decoration: none;">@Srimanmiryala</a>
+          </div>
+        </div>
+
+        <!-- Codeforces Card -->
+        <div class="stat-box" style="border-top: 3px solid #6366f1;">
+          <div class="stat-platform-tag">
+            <span>Codeforces Official</span>
+            <span class="stat-badge badge-indigo">Specialist</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 10px;">
+            <span class="stat-num" style="color: #a5b4fc;">1503</span>
+            <span style="font-size: 13px; color: var(--text-muted);">Peak Rating</span>
+          </div>
+          <div class="stat-subtext" style="margin-top: 10px;">
+            • Regularly competing in Division 2 and Division 3 rounds<br>
+            • Core strengths: Segment Trees, Dynamic Programming, Graphs<br>
+            • Profile: <a href="https://codeforces.com/profile/Srimanmiryala" target="_blank" style="color: #38bdf8; text-decoration: none;">@Srimanmiryala</a>
+          </div>
+        </div>
+
+        <!-- Overall DSA Card -->
+        <div class="stat-box" style="border-top: 3px solid #10b981;">
+          <div class="stat-platform-tag">
+            <span>Total Algorithmic Solved</span>
+            <span class="stat-badge badge-emerald">Comprehensive</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 10px;">
+            <span class="stat-num" style="color: #34d399;">1,500+</span>
+            <span style="font-size: 13px; color: var(--text-muted);">Problems</span>
+          </div>
+          <div class="stat-subtext" style="margin-top: 10px;">
+            • Solved across LeetCode, Codeforces, CodeChef, and HackerRank<br>
+            • Deep mastery in Data Structures, Time/Space Optimization<br>
+            • TS EAMCET State Rank <strong>#2,245</strong> of 224,000+ students
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SKILLS (Clean Logos & Names, No Bars)
+    ═══════════════════════════════════════════ -->
+    <section id="skills" class="section-wrap">
+      <div class="section-label">Technical Stack</div>
+      <h2 class="section-title">Skills &amp; Technologies</h2>
+      <p class="section-desc">Technologies and developer tools I actively use and can demonstrate in depth.</p>
+
+      <div class="skills-grid">
+        
+        <!-- Programming Languages -->
+        <div class="skill-category-card">
+          <div class="skill-cat-title">
+            <i data-lucide="code-2" style="width: 16px; height: 16px; color:#38bdf8;"></i>
+            <span>Languages</span>
+          </div>
+          <div class="skill-pills-wrap">
+            <div class="skill-item-pill"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+            <div class="skill-item-pill"><i class="devicon-java-plain colored"></i><span>Java</span></div>
+            <div class="skill-item-pill"><i class="devicon-c-plain colored"></i><span>C</span></div>
+            <div class="skill-item-pill"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
+            <div class="skill-item-pill"><i class="devicon-typescript-plain colored"></i><span>TypeScript</span></div>
+            <div class="skill-item-pill"><i class="devicon-mysql-plain colored"></i><span>SQL</span></div>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="skill-category-card">
+          <div class="skill-cat-title">
+            <i data-lucide="layout" style="width: 16px; height: 16px; color:#c084fc;"></i>
+            <span>Frontend</span>
+          </div>
+          <div class="skill-pills-wrap">
+            <div class="skill-item-pill"><i class="devicon-react-original colored"></i><span>React.js</span></div>
+            <div class="skill-item-pill"><i class="devicon-html5-plain colored"></i><span>HTML5</span></div>
+            <div class="skill-item-pill"><i class="devicon-css3-plain colored"></i><span>CSS3</span></div>
+            <div class="skill-item-pill"><i class="devicon-tailwindcss-plain colored"></i><span>Tailwind CSS</span></div>
+            <div class="skill-item-pill"><i class="devicon-materialui-plain colored"></i><span>Material UI</span></div>
+          </div>
+        </div>
+
+        <!-- Backend & APIs -->
+        <div class="skill-category-card">
+          <div class="skill-cat-title">
+            <i data-lucide="server" style="width: 16px; height: 16px; color:#34d399;"></i>
+            <span>Backend &amp; APIs</span>
+          </div>
+          <div class="skill-pills-wrap">
+            <div class="skill-item-pill"><i class="devicon-fastapi-plain colored"></i><span>FastAPI</span></div>
+            <div class="skill-item-pill"><i class="devicon-flask-original"></i><span>Flask</span></div>
+            <div class="skill-item-pill"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
+            <div class="skill-item-pill"><i class="devicon-express-original"></i><span>Express.js</span></div>
+            <div class="skill-item-pill"><i data-lucide="radio" style="width:14px; height:14px; color:#38bdf8;"></i><span>Socket.IO</span></div>
+            <div class="skill-item-pill"><i data-lucide="link" style="width:14px; height:14px; color:#fbbf24;"></i><span>REST APIs</span></div>
+          </div>
+        </div>
+
+        <!-- Databases -->
+        <div class="skill-category-card">
+          <div class="skill-cat-title">
+            <i data-lucide="database" style="width: 16px; height: 16px; color:#f59e0b;"></i>
+            <span>Databases</span>
+          </div>
+          <div class="skill-pills-wrap">
+            <div class="skill-item-pill"><i class="devicon-mysql-plain colored"></i><span>MySQL</span></div>
+            <div class="skill-item-pill"><i class="devicon-mongodb-plain colored"></i><span>MongoDB</span></div>
+            <div class="skill-item-pill"><i class="devicon-redis-plain colored"></i><span>Redis</span></div>
+            <div class="skill-item-pill"><i class="devicon-firebase-plain colored"></i><span>Firebase</span></div>
+          </div>
+        </div>
+
+        <!-- AI & Machine Learning -->
+        <div class="skill-category-card">
+          <div class="skill-cat-title">
+            <i data-lucide="cpu" style="width: 16px; height: 16px; color:#f43f5e;"></i>
+            <span>AI / ML &amp; Frameworks</span>
+          </div>
+          <div class="skill-pills-wrap">
+            <div class="skill-item-pill"><i class="devicon-pytorch-original colored"></i><span>PyTorch</span></div>
+            <div class="skill-item-pill"><i class="devicon-tensorflow-original colored"></i><span>TensorFlow</span></div>
+            <div class="skill-item-pill"><i class="devicon-scikitlearn-plain colored"></i><span>Scikit-learn</span></div>
+            <div class="skill-item-pill"><i class="devicon-pandas-original colored"></i><span>Pandas</span></div>
+            <div class="skill-item-pill"><i class="devicon-numpy-original colored"></i><span>NumPy</span></div>
+            <div class="skill-item-pill"><i data-lucide="sparkles" style="width:14px; height:14px; color:#c084fc;"></i><span>LangChain</span></div>
+            <div class="skill-item-pill"><i data-lucide="binary" style="width:14px; height:14px; color:#38bdf8;"></i><span>FAISS</span></div>
+          </div>
+        </div>
+
+        <!-- Tools & DevOps -->
+        <div class="skill-category-card">
+          <div class="skill-cat-title">
+            <i data-lucide="wrench" style="width: 16px; height: 16px; color:#94a3b8;"></i>
+            <span>Tools &amp; CS Core</span>
+          </div>
+          <div class="skill-pills-wrap">
+            <div class="skill-item-pill"><i class="devicon-git-plain colored"></i><span>Git / GitHub</span></div>
+            <div class="skill-item-pill"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+            <div class="skill-item-pill"><i class="devicon-linux-plain colored"></i><span>Linux</span></div>
+            <div class="skill-item-pill"><i class="devicon-postman-plain colored"></i><span>Postman</span></div>
+            <div class="skill-item-pill"><i data-lucide="git-branch" style="width:14px; height:14px; color:#34d399;"></i><span>System Design</span></div>
+            <div class="skill-item-pill"><i data-lucide="shield-check" style="width:14px; height:14px; color:#38bdf8;"></i><span>OOP / DBMS / OS</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CERTIFICATIONS
+    ═══════════════════════════════════════════ -->
+    <section id="certifications" class="section-wrap">
+      <div class="section-label">Certifications</div>
+      <h2 class="section-title">Licenses &amp; Credentials</h2>
+      <p class="section-desc">Industry credentials in Cloud AI, Networking, Algorithms, and Software Engineering.</p>
+
+      <div class="certs-grid">
+        
+        <!-- 1. Oracle GenAI -->
+        <div class="cert-card">
+          <div class="cert-icon-badge" style="background: rgba(245, 158, 11, 0.12); color:#f59e0b;">
+            <i data-lucide="cloud" style="width: 22px; height: 22px;"></i>
+          </div>
+          <div>
+            <div class="cert-name">Oracle Cloud Infrastructure (OCI) 2025 Certified Generative AI Professional</div>
+            <div class="cert-issuer">Oracle Corporation</div>
+            <div class="cert-meta">LLMs, Vector Databases, OCI Generative AI Service · 2025</div>
+          </div>
+        </div>
+
+        <!-- 2. Cisco CCNA Networking -->
+        <div class="cert-card">
+          <div class="cert-icon-badge" style="background: rgba(6, 182, 212, 0.12); color:#06b6d4;">
+            <i data-lucide="network" style="width: 22px; height: 22px;"></i>
+          </div>
+          <div>
+            <div class="cert-name">Cisco CCNA: Introduction to Networks &amp; Switching</div>
+            <div class="cert-issuer">Cisco Networking Academy</div>
+            <div class="cert-meta">IP Addressing, Subnetting, OSI Model, Routing Protocols · 2025</div>
+          </div>
+        </div>
+
+        <!-- 3. Cisco Python Essentials 1 & 2 -->
+        <div class="cert-card">
+          <div class="cert-icon-badge" style="background: rgba(99, 102, 241, 0.12); color:#818cf8;">
+            <i data-lucide="code" style="width: 22px; height: 22px;"></i>
+          </div>
+          <div>
+            <div class="cert-name">Python Essentials 1 &amp; Python Essentials 2</div>
+            <div class="cert-issuer">Cisco Networking Academy &amp; OpenEDG Python Institute</div>
+            <div class="cert-meta">Advanced OOP, File I/O, Generators, Exception Handling · 2025</div>
+          </div>
+        </div>
+
+        <!-- 4. Infosys Springboard Python -->
+        <div class="cert-card">
+          <div class="cert-icon-badge" style="background: rgba(16, 185, 129, 0.12); color:#34d399;">
+            <i data-lucide="terminal" style="width: 22px; height: 22px;"></i>
+          </div>
+          <div>
+            <div class="cert-name">Programming Fundamentals using Python &amp; Advanced Python</div>
+            <div class="cert-issuer">Infosys Springboard</div>
+            <div class="cert-meta">Data Structures, Modules, Algorithmic Thinking</div>
+          </div>
+        </div>
+
+        <!-- 5. Infosys Springboard C -->
+        <div class="cert-card">
+          <div class="cert-icon-badge" style="background: rgba(56, 189, 248, 0.12); color:#38bdf8;">
+            <i data-lucide="cpu" style="width: 22px; height: 22px;"></i>
+          </div>
+          <div>
+            <div class="cert-name">C Programming Fundamentals &amp; Data Structures</div>
+            <div class="cert-issuer">Infosys Springboard</div>
+            <div class="cert-meta">Memory Allocation, Pointers, Linked Lists, Stack &amp; Queues</div>
+          </div>
+        </div>
+
+        <!-- 6. NPTEL Java with DSA -->
+        <div class="cert-card">
+          <div class="cert-icon-badge" style="background: rgba(244, 63, 94, 0.12); color:#fb7185;">
+            <i data-lucide="award" style="width: 22px; height: 22px;"></i>
+          </div>
+          <div>
+            <div class="cert-name">Programming in Java with Data Structures &amp; Algorithms</div>
+            <div class="cert-issuer">NPTEL (IIT Kharagpur)</div>
+            <div class="cert-meta">Core Java, Multi-threading, Collections Framework, Trees &amp; Graphs</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         INTERACTIVE DEVELOPER CONSOLE (Terminal)
+    ═══════════════════════════════════════════ -->
+    <section id="terminal" class="section-wrap">
+      <div class="section-label">Developer Console</div>
+      <h2 class="section-title">Interactive Terminal</h2>
+      <p class="section-desc">Type commands or click quick action pills below to interact with the portfolio via CLI.</p>
+
+      <div class="terminal-container">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="t-dot dot-red"></span>
+            <span class="t-dot dot-yellow"></span>
+            <span class="t-dot dot-green"></span>
+          </div>
+          <div class="terminal-title">sriman@portfolio:~ (zsh)</div>
+          <div style="font-size: 11px; color: var(--text-dim);">Type 'help'</div>
+        </div>
+
+        <div class="terminal-body" id="terminalBody">
+          <div class="terminal-history" id="terminalHistory">
+            <div style="color: #94a3b8;">
+              <span style="color:#818cf8; font-weight:700;">Antigravity Terminal v2.4</span> — Connected to <span style="color:#38bdf8;">sriman-portfolio</span><br>
+              Type <span style="color:#fbbf24; font-weight:600;">'help'</span> to see available commands or click quick pills below.
+            </div>
+          </div>
+
+          <div class="terminal-input-wrap">
+            <span class="t-user">guest</span><span class="t-at">@</span><span class="t-path">sriman</span><span style="color:#6366f1;">:$</span>
+            <input 
+              type="text" 
+              id="terminalInput" 
+              class="terminal-input" 
+              placeholder="help, skills, projects, cp, resume, clear..." 
+              autocomplete="off" 
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <!-- Quick Terminal Chips -->
+        <div class="quick-chips-row">
+          <span style="font-size: 11.5px; color: var(--text-dim); align-self: center; margin-right: 4px;">Quick Run:</span>
+          <button class="quick-chip" onclick="executeCmd('help')">help</button>
+          <button class="quick-chip" onclick="executeCmd('about')">about</button>
+          <button class="quick-chip" onclick="executeCmd('skills')">skills</button>
+          <button class="quick-chip" onclick="executeCmd('projects')">projects</button>
+          <button class="quick-chip" onclick="executeCmd('cp')">cp</button>
+          <button class="quick-chip" onclick="executeCmd('certifications')">certifications</button>
+          <button class="quick-chip" onclick="executeCmd('resume')">resume</button>
+          <button class="quick-chip" onclick="executeCmd('contact')">contact</button>
+          <button class="quick-chip" onclick="executeCmd('clear')">clear</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CONTACT SECTION (Phone Number Hidden)
+    ═══════════════════════════════════════════ -->
+    <section id="contact" class="section-wrap">
+      <div class="contact-card">
+        <div class="section-label" style="justify-content: center;">Get in Touch</div>
+        <h2 class="section-title">Let's Connect &amp; Build</h2>
+        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto; font-size: 15px;">
+          I'm actively seeking Software Engineering (SWE / SDE) and AI/ML opportunities.
+          Feel free to reach out via email or connect through professional networks.
+        </p>
+
+        <div class="contact-links-grid">
+          <a href="mailto:srimanmiryala9@gmail.com" class="contact-link-pill">
+            <i data-lucide="mail" style="width: 17px; height: 17px; color:#38bdf8;"></i>
+            <span>srimanmiryala9@gmail.com</span>
+          </a>
+          <a href="https://www.linkedin.com/in/sriman-miry3549651b6" target="_blank" class="contact-link-pill">
+            <i class="devicon-linkedin-plain colored"></i>
+            <span>LinkedIn Profile</span>
+          </a>
+          <a href="https://github.com/Srimanmiryala" target="_blank" class="contact-link-pill">
+            <i class="devicon-github-original"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="resume.pdf" target="_blank" class="contact-link-pill" style="border-color: rgba(99, 102, 241, 0.4); background: rgba(99, 102, 241, 0.1);">
+            <i data-lucide="file-text" style="width: 17px; height: 17px; color:#a5b4fc;"></i>
+            <span>Download Resume (PDF)</span>
+          </a>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- MINIMAL FOOTER -->
-  <footer class="border-t border-white/[0.06] py-6 text-xs text-slate-500 font-mono">
-    <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <span>Miryala Sriman &bull; DBS Bank Technology &bull; 2026</span>
-      <div class="flex gap-4">
-        <a href="https://leetcode.com/u/Srimanmiryala" target="_blank" class="hover:text-amber-300">LeetCode 1989</a>
-        <a href="https://codeforces.com/profile/Srimanmiryala" target="_blank" class="hover:text-cyan-300">Codeforces 1503</a>
-        <a href="https://linkedin.com/in/srimanmiryala" target="_blank" class="hover:text-sky-300">LinkedIn</a>
-        <a href="https://github.com/srimanmiryala" target="_blank" class="hover:text-white">GitHub</a>
-      </div>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Designed &amp; Engineered by <strong>Sriman Miryala</strong> · Hyderabad, India</p>
+      <p style="margin-top: 4px; font-size: 12px;">Apprentice @ DBS Bank Technology · B.Tech CSE (2023–2027)</p>
     </div>
   </footer>
 
-  <!-- RESUME MODAL (EXACT 1-PAGE REPLICA) -->
-  <div id="resumeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-    <div class="relative w-full max-w-2xl max-h-[85vh] bg-[#0c1220] border border-white/[0.1] rounded-2xl p-6 overflow-y-auto space-y-4 text-xs font-sans">
-      <div class="flex justify-between items-center border-b border-white/[0.08] pb-3">
-        <h3 class="font-bold text-white text-sm">Official Resume &bull; Miryala Sriman</h3>
-        <div class="flex gap-2">
-          <button onclick="window.print()" class="px-2.5 py-1 bg-sky-500 text-white rounded text-xs font-semibold">Print / PDF</button>
-          <button onclick="closeResumeModal()" class="p-1 text-slate-400 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
-        </div>
-      </div>
-      <div class="space-y-3 text-slate-300 leading-relaxed text-[11px]">
-        <div>
-          <h4 class="font-bold text-white text-base">Miryala Sriman</h4>
-          <p class="text-slate-400">srimanmiryala9@gmail.com &bull; +91 9030243813 &bull; Hyderabad, Telangana</p>
-        </div>
-        <div>
-          <span class="text-emerald-400 font-bold uppercase block text-[10px] font-mono">EXPERIENCE</span>
-          <p class="text-white font-medium">Software Engineer Apprentice — DBS Bank Technology (Jun 2026 – Present)</p>
-          <p class="text-slate-400">&bull; Application security labs &bull; Spring Boot &amp; enterprise DevOps.</p>
-        </div>
-        <div>
-          <span class="text-purple-400 font-bold uppercase block text-[10px] font-mono">KEY PROJECTS</span>
-          <p class="text-white font-medium">1. Real-Time Collaborative Coding (FastAPI, Redis Pub/Sub, WebSockets, Docker)</p>
-          <p class="text-slate-400">40% less overhead, sub-50ms sync, 60% faster CI/CD, Top 10 at GenAI Hackathon 2025.</p>
-          <p class="text-white font-medium mt-1">2. ResU-Net Topology Optimization (PyTorch, CUDA AMP)</p>
-          <p class="text-slate-400">350x faster inference, 0.89 Dice score, 10x training speedup.</p>
-          <p class="text-white font-medium mt-1">3. Constraint-Based Scheduling Engine (Python, CSP, AC-3)</p>
-          <p class="text-slate-400">99.7% conflict-free, 60% faster than brute force.</p>
-        </div>
-        <div>
-          <span class="text-amber-400 font-bold uppercase block text-[10px] font-mono">STANDINGS</span>
-          <p>LeetCode Knight (Peak 1989, Top 3%) &bull; Codeforces Specialist (Peak 1503) &bull; 1,500+ Solved &bull; TS EAMCET Rank 2,245.</p>
-        </div>
+  <!-- ═══════════════════════════════════════════
+       PROJECT CASE STUDY MODAL DIALOG
+  ═══════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="projectModal" onclick="handleBackdropClick(event)">
+    <div class="modal-dialog" id="modalDialog">
+      <button class="modal-close-btn" onclick="closeProjectModal()" aria-label="Close dialog">
+        <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+      </button>
+      <div id="modalContent">
+        <!-- Injected via JavaScript -->
       </div>
     </div>
   </div>
 
+  <!-- JavaScript: Interactivity, Modal, Terminal, Lucide -->
   <script>
+    // Initialize Lucide Icons
     lucide.createIcons();
 
-    function openResumeModal() {
-      document.getElementById('resumeModal').classList.remove('hidden');
-    }
-    function closeResumeModal() {
-      document.getElementById('resumeModal').classList.add('hidden');
+    // Mobile Navigation Drawer Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const menuIcon = document.getElementById('menuIcon');
+
+    mobileToggle.addEventListener('click', () => {
+      mobileDrawer.classList.toggle('open');
+      const isOpen = mobileDrawer.classList.contains('open');
+      menuIcon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
+      lucide.createIcons();
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileDrawer.classList.remove('open');
+        menuIcon.setAttribute('data-lucide', 'menu');
+        lucide.createIcons();
+      });
+    });
+
+    // ─── PROJECT CASE STUDY DATA & MODAL LOGIC ───
+    const projectDetails = {
+      'collab-editor': {
+        title: 'Real-Time Collaborative Code Editor',
+        category: 'Full-Stack Engineering & Distributed Systems',
+        problem: 'Distributed developer teams frequently face editing collisions, cursor drift, and sync latency when pairing remotely. Building a synchronized code editor requires high-frequency delta broadcasting without overloading the server or causing UI jitter.',
+        achievements: [
+          { val: '< 50ms', lbl: 'End-to-End Sync Latency' },
+          { val: '40% Lower', lbl: 'Bandwidth Overhead via Debounce' },
+          { val: 'Top 10', lbl: 'GenAI Hackathon 2025 Placement' },
+          { val: 'Zero Collisions', lbl: 'Room Isolation & State Locks' }
+        ],
+        howBuilt: 'Engineered with Monaco Editor embedded in a React frontend. The backend runs on Node.js using Socket.IO for low-latency WebSocket communication. Ephemeral room state and cursor tracking are persisted in Redis with atomic multi-key updates. Implemented operational transformation heuristics to prevent character overwrites during simultaneous typing.',
+        architecture: `[Client 1: Monaco Editor] ──┐
+                          ├─── WebSocket Event (delta, cursor, selection)
+[Client 2: Monaco Editor] ──┘
+          │
+          ▼
+┌───────────────────────────────────────────────┐
+│     Node.js Socket.IO Real-Time Gateway       │
+│  - Debounce delta batches (16ms frame sync)   │
+│  - Room ID authentication & session tokens    │
+└──────────────────────┬────────────────────────┘
+                       ▼
+┌───────────────────────────────────────────────┐
+│           Redis Pub/Sub & Memory Cache        │
+│  - Room snapshot store (hash map)             │
+│  - Cursor positional offsets                  │
+└──────────────────────┬────────────────────────┘
+                       ▼
+       Broadcast delta to peer sockets (<50ms)`,
+        tech: ['React.js', 'Monaco Editor', 'Socket.IO', 'Node.js', 'Express', 'Redis', 'Docker']
+      },
+      'resunet': {
+        title: 'ResU-Net Medical Image Segmentation',
+        category: 'AI / Deep Learning Research',
+        problem: 'Biomedical image boundary segmentation (cellular, histological, CT) demands pixel-level accuracy while standard convolutional networks suffer from vanishing gradients and prohibitively slow training times on large volumetric datasets.',
+        achievements: [
+          { val: '0.89', lbl: 'Mean Dice Similarity Coefficient' },
+          { val: '350× Faster', lbl: 'Inference Throughput' },
+          { val: '10× Boost', lbl: 'Training Speed via CUDA AMP' },
+          { val: 'Float16/32', lbl: 'Mixed Precision Memory Optimization' }
+        ],
+        howBuilt: 'Constructed a custom Residual U-Net in PyTorch replacing conventional convolutional blocks with identity shortcut connections (ResNet-34 encoder). Integrated PyTorch CUDA Automatic Mixed Precision (AMP) to train in FP16 while maintaining FP32 master weights. Trained using combined Binary Cross-Entropy (BCE) and Soft Dice Loss function.',
+        architecture: `Input Image (512x512x3)
+      │
+      ▼
+┌──────────────┐                  ┌──────────────┐
+│ Residual Enc │ ── Skip Conn ──► │ Residual Dec │ ──► Output Mask (Dice 0.89)
+└──────┬───────┘                  └──────▲───────┘
+       │                                 │
+       ▼                                 │
+┌──────────────┐                  ┌──────────────┐
+│ Residual Enc │ ── Skip Conn ──► │ Residual Dec │
+└──────┬───────┘                  └──────▲───────┘
+       │                                 │
+       └────────► [Bottleneck] ──────────┘
+                  CUDA AMP Mixed Precision`,
+        tech: ['PyTorch', 'Torchvision', 'CUDA AMP', 'ResNet Architecture', 'NumPy', 'OpenCV']
+      },
+      'unlearning': {
+        title: 'Machine Unlearning Research System',
+        category: 'AI / Machine Learning Privacy',
+        problem: 'Under regulations such as GDPR ("Right to be Forgotten"), companies must delete user data from trained ML models. Retraining multi-parameter deep networks from scratch upon every deletion request is computationally untenable and costly.',
+        achievements: [
+          { val: '98%+', lbl: 'Knowledge Retention on Retained Data' },
+          { val: '< 2% Error', lbl: 'Margin from Full Retraining Baseline' },
+          { val: 'Zero Retrain', lbl: 'Eliminates Complete Epoch Passes' }
+        ],
+        howBuilt: 'Implemented selective weight updating using targeted gradient ascent on the forget set combined with fine-tuning on the retain set. Validated with Membership Inference Attacks (MIA) to empirically verify that the influence of deleted samples was completely neutralized.',
+        architecture: `Pre-trained Weights ───────► Gradient Ascent on "Forget Set" (Loss Inversion)
+                                     │
+                                     ▼
+Retain Set Calibration ────► Orthogonal Fine-tuning (Weight Constraints)
+                                     │
+                                     ▼
+                        Evaluation & Verification
+          [Retention Metric: 98%+]  │  [Forget Metric: MIA < 50%]`,
+        tech: ['PyTorch', 'Scikit-learn', 'Differential Privacy', 'Python', 'NumPy']
+      },
+      'timetable': {
+        title: 'Constraint Timetable Maker',
+        category: 'Optimization & Application Engineering',
+        problem: 'Academic scheduling involves NP-hard combinatorial constraint optimization: avoiding faculty overlapping hours, respecting classroom and lab capacities, balancing student workloads, and accommodating elective subject choices.',
+        achievements: [
+          { val: '99.7%', lbl: 'Conflict-Free Schedule Generation' },
+          { val: '60× Faster', lbl: 'Execution Speed vs. Brute Force' },
+          { val: 'Multi-Batch', lbl: 'Simultaneous Dept Level Scheduling' }
+        ],
+        howBuilt: 'Formulated the problem as a Constraint Satisfaction Problem (CSP) combined with a Genetic Algorithm (GA) heuristic. Designed custom fitness functions penalizing hard clashes (room/faculty double bookings) and soft clashes (uneven lecture distributions).',
+        architecture: `Input Matrix: Faculty, Batches, Rooms, Subject Hours
+                        │
+                        ▼
+┌───────────────────────────────────────────────────┐
+│          Genetic Algorithm Engine                 │
+│  1. Population Initialization (Random Chromosomes)│
+│  2. Fitness Evaluation (Penalty Calculation)      │
+│  3. Crossover & Mutation Operators                │
+│  4. Elitism (Preserve Top Candidates)             │
+└───────────────────────┬───────────────────────────┘
+                        ▼
+       Output: 99.7% Conflict-Free Timetable Matrix`,
+        tech: ['Python', 'Genetic Algorithms', 'Constraint Satisfaction', 'NumPy']
+      },
+      'movie-rec': {
+        title: 'AI Movie Discovery & Recommendation',
+        category: 'Full-Stack & Generative AI',
+        problem: 'Static genre-based movie recommendations fail to capture nuanced user preferences or conversational intent like "show me atmospheric neo-noir mysteries with mind-bending plots".',
+        achievements: [
+          { val: 'Gemini 1.5', lbl: 'Context-Aware Query Expansion' },
+          { val: 'Live TMDb', lbl: 'Real-Time Metadata & Posters' },
+          { val: '< 200ms', lbl: 'Cached Response Times' }
+        ],
+        howBuilt: 'Built with Flask backend and TMDb API integration. Leveraged Google Gemini API to parse natural language user prompts into structured queries and sentiment profiles, then queried TMDb for corresponding films and synthesized custom recommendation summaries.',
+        architecture: `User Prompt: "Dark sci-fi with philosophical endings"
+                        │
+                        ▼
+┌───────────────────────────────────────────────────┐
+│        Google Gemini AI Parsing Engine            │
+│  - Extracts themes, tone, similar directors       │
+│  - Converts to structured query tags              │
+└───────────────────────┬───────────────────────────┘
+                        ▼
+┌───────────────────────────────────────────────────┐
+│            TMDb API & Cache Layer                 │
+│  - Fetches film metadata, ratings, posters        │
+└───────────────────────┬───────────────────────────┘
+                        ▼
+       Interactive Responsive Recommendation UI`,
+        tech: ['Python', 'Flask', 'Google Gemini API', 'TMDb REST API', 'JavaScript', 'HTML/CSS']
+      },
+      'real-estate': {
+        title: 'Real Estate Maps Discovery',
+        category: 'Full-Stack & Geospatial Applications',
+        problem: 'Property seekers need fast, visual, location-first discovery rather than scrolling through disconnected text lists without spatial context.',
+        achievements: [
+          { val: 'Interactive', lbl: 'Google Maps Spatial Integration' },
+          { val: 'Radius Query', lbl: 'Proximity Filtering around Land-marks' },
+          { val: 'Full-Stack', lbl: 'End-to-End CRUD with MongoDB' }
+        ],
+        howBuilt: 'Developed a full-stack real estate application featuring Google Maps JavaScript API with custom marker clustering. Designed MongoDB geospatial indexes ($nearSphere) for sub-second proximity queries and Express REST APIs with JWT authentication for property listers.',
+        architecture: `Client (React + Google Maps JS SDK)
+         │  - Map viewport pan/zoom triggers bounding box fetch
+         ▼
+Express.js Backend Gateway
+         │  - Validates geospatial coordinate pairs
+         ▼
+MongoDB with 2dsphere Geo-Indexes
+         │  - Returns matching property pins within radius
+         ▼
+Rendered Map Markers with Interactive Property Previews`,
+        tech: ['React.js', 'Google Maps API', 'Node.js', 'Express.js', 'MongoDB', 'GeoJSON']
+      }
+    };
+
+    function openProjectModal(id) {
+      const data = projectDetails[id];
+      if (!data) return;
+
+      const metricsHtml = data.achievements.map(a => `
+        <div class="modal-metric-card">
+          <div class="modal-metric-val">${a.val}</div>
+          <div class="modal-metric-lbl">${a.lbl}</div>
+        </div>
+      `).join('');
+
+      const techHtml = data.tech.map(t => `<span class="tech-pill">${t}</span>`).join(' ');
+
+      const content = `
+        <div class="project-tag tag-blue" style="margin-bottom: 8px;">${data.category}</div>
+        <h2 class="modal-title">${data.title}</h2>
+        <div class="modal-subtitle">Technical Case Study &amp; Engineering Implementation</div>
+
+        <div class="modal-section">
+          <div class="modal-section-title"><i data-lucide="target" style="width:16px;height:16px;"></i> The Problem &amp; Core Objective</div>
+          <p class="modal-text">${data.problem}</p>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title"><i data-lucide="zap" style="width:16px;height:16px;"></i> Key Quantifiable Achievements</div>
+          <div class="modal-metrics-grid">
+            ${metricsHtml}
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title"><i data-lucide="cpu" style="width:16px;height:16px;"></i> How I Built It &amp; Engineering Decisions</div>
+          <p class="modal-text">${data.howBuilt}</p>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title"><i data-lucide="git-merge" style="width:16px;height:16px;"></i> System Architecture &amp; Data Pipeline</div>
+          <pre class="arch-diagram-box">${data.architecture}</pre>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title"><i data-lucide="code" style="width:16px;height:16px;"></i> Technologies Used</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;">
+            ${techHtml}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modalContent').innerHTML = content;
+      lucide.createIcons();
+      document.getElementById('projectModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
-    function copyEmail() {
-      navigator.clipboard.writeText('srimanmiryala9@gmail.com').then(() => {
-        document.getElementById('copyText').textContent = 'Copied!';
-        setTimeout(() => { document.getElementById('copyText').textContent = 'Copy'; }, 2000);
-      });
+    function closeProjectModal() {
+      document.getElementById('projectModal').classList.remove('active');
+      document.body.style.overflow = '';
     }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'projectModal') {
+        closeProjectModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeProjectModal();
+    });
+
+    // ─── INTERACTIVE DEVELOPER CONSOLE LOGIC ───
+    const terminalInput = document.getElementById('terminalInput');
+    const terminalHistory = document.getElementById('terminalHistory');
+    const terminalBody = document.getElementById('terminalBody');
+
+    const commands = {
+      help: () => `
+<span style="color:#fbbf24; font-weight:600;">Available Commands:</span>
+  <span style="color:#38bdf8;">about</span>          — Summary of Sriman's background & education
+  <span style="color:#38bdf8;">skills</span>         — Technical stack & programming proficiencies
+  <span style="color:#38bdf8;">projects</span>       — List of key featured software engineering projects
+  <span style="color:#38bdf8;">cp</span>             — Competitive programming ratings (LeetCode, Codeforces)
+  <span style="color:#38bdf8;">certifications</span> — Industry certifications (Oracle, Cisco, Infosys, NPTEL)
+  <span style="color:#38bdf8;">resume</span>         — Open/download Sriman's official PDF resume
+  <span style="color:#38bdf8;">contact</span>        — Email & professional networking profiles
+  <span style="color:#38bdf8;">clear</span>          — Clear terminal output history
+      `,
+      about: () => `
+<span style="color:#34d399; font-weight:600;">Sriman Miryala</span> — Software Engineer Apprentice @ DBS Bank Technology
+• College: Vasavi College of Engineering, Hyderabad (B.Tech CSE, 2023–2027)
+• GPA: 8.03 / 10 | Class XII: 98.1% | TS EAMCET State Rank: #2,245
+• Specializations: Backend Systems, Real-time Architectures, AI/ML, Advanced DSA
+      `,
+      skills: () => `
+<span style="color:#38bdf8; font-weight:600;">Technical Stack:</span>
+  Languages:   Python, Java, C, JavaScript, TypeScript, SQL
+  Frontend:    React.js, HTML5, CSS3, Tailwind CSS, Material UI
+  Backend:     FastAPI, Flask, Node.js, Express.js, Socket.IO, REST APIs
+  Databases:   MySQL, MongoDB, Redis, Firebase
+  AI/ML:       PyTorch, TensorFlow, Scikit-learn, Pandas, NumPy, LangChain, FAISS
+  Tools:       Git, GitHub, Docker, Linux, Postman
+      `,
+      projects: () => `
+<span style="color:#c084fc; font-weight:600;">Featured Projects:</span>
+  1. Collaborative Code Editor    — Real-time Monaco editor, Socket.IO & Redis (<50ms sync)
+  2. ResU-Net Segmentation        — PyTorch residual U-Net, 0.89 Dice, 10x CUDA AMP speedup
+  3. Machine Unlearning           — Privacy-preserving model data point removal without retraining
+  4. Constraint Timetable Maker   — Combinatorial optimization, 99.7% conflict-free
+  5. AI Movie Recommendation      — Flask + Google Gemini AI + TMDb integration
+  6. Real Estate Maps Discovery   — React + Google Maps JS API + MongoDB geospatial
+      `,
+      cp: () => `
+<span style="color:#fbbf24; font-weight:600;">Competitive Programming:</span>
+  • LeetCode:   Knight (Peak Rating: 1989, Top 3% globally, Handle: @Srimanmiryala)
+  • Codeforces: Specialist (Peak Rating: 1503, Handle: @Srimanmiryala)
+  • Solved:     1,500+ algorithmic challenges across competitive platforms
+      `,
+      certifications: () => `
+<span style="color:#38bdf8; font-weight:600;">Certifications:</span>
+  • Oracle Cloud Infrastructure (OCI) 2025 GenAI Certified Professional
+  • Cisco CCNA: Introduction to Networks & Switching (2025)
+  • Cisco Python Essentials 1 & 2 (2025)
+  • Infosys Springboard: Programming in Python & Advanced Python
+  • Infosys Springboard: C Programming Fundamentals & Data Structures
+  • NPTEL: Programming in Java with DSA (Elite)
+      `,
+      resume: () => {
+        window.open('resume.pdf', '_blank');
+        return `<span style="color:#34d399;">Triggering resume view: opening 'resume.pdf' in a new tab...</span>`;
+      },
+      contact: () => `
+<span style="color:#38bdf8; font-weight:600;">Contact Sriman Miryala:</span>
+  • Email:    <a href="mailto:srimanmiryala9@gmail.com" style="color:#a5b4fc;">srimanmiryala9@gmail.com</a>
+  • LinkedIn: <a href="https://www.linkedin.com/in/sriman-miry3549651b6" target="_blank" style="color:#a5b4fc;">linkedin.com/in/sriman-miry3549651b6</a>
+  • GitHub:   <a href="https://github.com/Srimanmiryala" target="_blank" style="color:#a5b4fc;">github.com/Srimanmiryala</a>
+  • Location: Hyderabad, India (Open to Relocation & Remote)
+      `,
+      clear: () => {
+        terminalHistory.innerHTML = '';
+        return null;
+      }
+    };
+
+    function executeCmd(cmdText) {
+      const raw = cmdText.trim().toLowerCase();
+      if (!raw) return;
+
+      const userLine = document.createElement('div');
+      userLine.innerHTML = `<span class="t-user">guest</span><span class="t-at">@</span><span class="t-path">sriman</span><span style="color:#6366f1;">:$</span> ${escapeHtml(raw)}`;
+      terminalHistory.appendChild(userLine);
+
+      if (commands[raw]) {
+        const res = commands[raw]();
+        if (res) {
+          const resLine = document.createElement('div');
+          resLine.innerHTML = res;
+          terminalHistory.appendChild(resLine);
+        }
+      } else {
+        const errLine = document.createElement('div');
+        errLine.innerHTML = `<span style="color:#f43f5e;">command not found: ${escapeHtml(raw)}</span>. Type <span style="color:#fbbf24;">'help'</span> for list of commands.`;
+        terminalHistory.appendChild(errLine);
+      }
+
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    terminalInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = terminalInput.value;
+        terminalInput.value = '';
+        executeCmd(val);
+      }
+    });
+
+    // ─── DYNAMIC TYPEWRITER (Rock-solid, zero layout jitter) ───
+    const roles = [
+      "Software Engineer",
+      "Full-Stack Developer",
+      "AI / ML Enthusiast",
+      "LeetCode Knight (1989)",
+      "Codeforces Specialist",
+      "Competitive Programmer",
+      "Apprentice @ DBS Bank"
+    ];
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeletingRole = false;
+    const typewriterEl = document.getElementById('dynamicTypewriter');
+
+    function loopTypewriter() {
+      if (!typewriterEl) return;
+      const currentRole = roles[roleIdx];
+      
+      if (isDeletingRole) {
+        charIdx--;
+        typewriterEl.textContent = currentRole.substring(0, charIdx);
+      } else {
+        charIdx++;
+        typewriterEl.textContent = currentRole.substring(0, charIdx);
+      }
+
+      let speed = isDeletingRole ? 35 : 80;
+
+      if (!isDeletingRole && charIdx === currentRole.length) {
+        speed = 1800; // Pause at completed word
+        isDeletingRole = true;
+      } else if (isDeletingRole && charIdx === 0) {
+        isDeletingRole = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+        speed = 350; // Pause before typing next word
+      }
+
+      setTimeout(loopTypewriter, speed);
+    }
+    loopTypewriter();
   </script>
 </body>
 </html>
